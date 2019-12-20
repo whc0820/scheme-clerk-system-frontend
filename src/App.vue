@@ -1,28 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <v-app>
+      <v-content :class="dark[0]?'dark':''">
+        <router-view :dark="dark" style="width:100%;height:100%;" />
+      </v-content>
+    </v-app>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.dark {
+  background: #000;
+  color: #fff;
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      dark: [false]
+    };
+  }
+};
+</script>
