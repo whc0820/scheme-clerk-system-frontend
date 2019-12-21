@@ -2,7 +2,12 @@
   <div id="app">
     <v-app>
       <v-content :class="dark[0]?'dark':''">
-        <router-view :dark="dark" :schedule="schedule" :staffs="staffs" style="width:100%;height:100%;" />
+        <router-view
+          :dark="dark"
+          :schedule="schedule"
+          :staffs="staffs"
+          style="width:100%;height:100%;"
+        />
       </v-content>
     </v-app>
   </div>
@@ -363,7 +368,7 @@ let mStaffs = [
 
 let mSchedule = [
   [
-    [mStaffs[0], mStaffs[1]],
+    [mStaffs[18], mStaffs[1]],
     [mStaffs[2], mStaffs[3]],
     [mStaffs[4], mStaffs[5]]
   ],
@@ -378,7 +383,7 @@ let mSchedule = [
     [mStaffs[16], mStaffs[17]]
   ],
   [
-    [mStaffs[0], mStaffs[1]],
+    [mStaffs[18], mStaffs[1]],
     [mStaffs[2], mStaffs[3]],
     [mStaffs[4], mStaffs[5]]
   ],
@@ -392,7 +397,11 @@ let mSchedule = [
     [mStaffs[14], mStaffs[15]],
     [mStaffs[16], mStaffs[17]]
   ],
-  [[mStaffs[0], mStaffs[1]], [mStaffs[2], mStaffs[3]], [mStaffs[4], mStaffs[5]]]
+  [
+    [mStaffs[18], mStaffs[1]],
+    [mStaffs[2], mStaffs[3]],
+    [mStaffs[4], mStaffs[5]]
+  ]
 ];
 
 export default {
