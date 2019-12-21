@@ -210,6 +210,9 @@ export default {
       ];
       this.$forceUpdate();
     }
+  },
+  created() {
+
   }
 };
 </script>

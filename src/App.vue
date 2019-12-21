@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <v-content :class="dark[0]?'dark':''">
-        <router-view :dark="dark" style="width:100%;height:100%;" />
+        <router-view :dark="dark" :schedule="schedule" :staffs="staffs" style="width:100%;height:100%;" />
       </v-content>
     </v-app>
   </div>
@@ -16,10 +16,391 @@
 </style>
 
 <script>
+let mStaffs = [
+  {
+    id: "s0000",
+    firstName: "Super",
+    lastName: "Admin",
+    role: 0,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#E0E0E0",
+    workingTime: [
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true]
+    ]
+  },
+  {
+    id: "s0001",
+    firstName: "Jason",
+    lastName: "Chen",
+    role: 0,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#E57373",
+    workingTime: [
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
+      [true, true, true]
+    ]
+  },
+  {
+    id: "s0002",
+    firstName: "Scot",
+    lastName: "Liou",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#F06292",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0003",
+    firstName: "Janelle",
+    lastName: "Wu",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#BA68C8",
+    workingTime: [
+      [true, false, true],
+      [false, true, false],
+      [true, false, true],
+      [false, true, false],
+      [true, false, true],
+      [false, true, false],
+      [true, false, true]
+    ]
+  },
+  {
+    id: "s0004",
+    firstName: "Angel",
+    lastName: "Tsao",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#9575CD",
+    workingTime: [
+      [false, true, false],
+      [true, false, true],
+      [false, true, false],
+      [true, false, true],
+      [false, true, false],
+      [true, false, true],
+      [false, true, false]
+    ]
+  },
+  {
+    id: "s0005",
+    firstName: "Tony",
+    lastName: "Lin",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#7986CB",
+    workingTime: [
+      [true, true, true],
+      [false, false, false],
+      [true, true, true],
+      [false, false, false],
+      [true, true, true],
+      [false, false, false],
+      [true, true, true]
+    ]
+  },
+  {
+    id: "s0006",
+    firstName: "Ted",
+    lastName: "Lin",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#64B5F6",
+    workingTime: [
+      [false, false, false],
+      [true, true, true],
+      [false, false, false],
+      [true, true, true],
+      [false, false, false],
+      [true, true, true],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0007",
+    firstName: "Edward",
+    lastName: "Huang",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#4FC3F7",
+    workingTime: [
+      [true, false, true],
+      [true, false, true],
+      [true, false, true],
+      [true, false, true],
+      [true, false, true],
+      [true, false, true],
+      [true, false, true]
+    ]
+  },
+  {
+    id: "s0008",
+    firstName: "Nyoto",
+    lastName: "Art",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#4DD0E1",
+    workingTime: [
+      [false, true, false],
+      [false, true, false],
+      [false, true, false],
+      [false, true, false],
+      [false, true, false],
+      [false, true, false],
+      [false, true, false]
+    ]
+  },
+  {
+    id: "s0009",
+    firstName: "Nasin",
+    lastName: "Lin",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#4DB6AC",
+    workingTime: [
+      [true, false, false],
+      [false, true, false],
+      [false, false, true],
+      [true, false, false],
+      [false, true, false],
+      [false, false, true],
+      [true, false, false]
+    ]
+  },
+  {
+    id: "s0010",
+    firstName: "Fermi",
+    lastName: "Chen",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#81C784",
+    workingTime: [
+      [false, false, true],
+      [false, true, false],
+      [true, false, false],
+      [false, false, true],
+      [false, true, false],
+      [true, false, false],
+      [false, false, true]
+    ]
+  },
+  {
+    id: "s0011",
+    firstName: "Jessie",
+    lastName: "Kao",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#AED581",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0012",
+    firstName: "Tess",
+    lastName: "Wu",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#DCE775",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0013",
+    firstName: "Jimmy",
+    lastName: "U",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#FFF176",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0014",
+    firstName: "Richard",
+    lastName: "Yiou",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#FFD54F",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0015",
+    firstName: "York",
+    lastName: "Liou",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#FFB74D",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0016",
+    firstName: "Mike",
+    lastName: "Yung",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#FF8A65",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0017",
+    firstName: "Jacky",
+    lastName: "Chen",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#A1887F",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  },
+  {
+    id: "s0018",
+    firstName: "Joyce",
+    lastName: "Chang",
+    role: 1,
+    phone: "0912345678",
+    email: "vuetify@example.com",
+    color: "#90A4AE",
+    workingTime: [
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ]
+  }
+];
+
+let mSchedule = [
+  [
+    [mStaffs[0], mStaffs[1]],
+    [mStaffs[2], mStaffs[3]],
+    [mStaffs[4], mStaffs[5]]
+  ],
+  [
+    [mStaffs[6], mStaffs[7]],
+    [mStaffs[8], mStaffs[9]],
+    [mStaffs[10], mStaffs[11]]
+  ],
+  [
+    [mStaffs[12], mStaffs[13]],
+    [mStaffs[14], mStaffs[15]],
+    [mStaffs[16], mStaffs[17]]
+  ],
+  [
+    [mStaffs[0], mStaffs[1]],
+    [mStaffs[2], mStaffs[3]],
+    [mStaffs[4], mStaffs[5]]
+  ],
+  [
+    [mStaffs[6], mStaffs[7]],
+    [mStaffs[8], mStaffs[9]],
+    [mStaffs[10], mStaffs[11]]
+  ],
+  [
+    [mStaffs[12], mStaffs[13]],
+    [mStaffs[14], mStaffs[15]],
+    [mStaffs[16], mStaffs[17]]
+  ],
+  [[mStaffs[0], mStaffs[1]], [mStaffs[2], mStaffs[3]], [mStaffs[4], mStaffs[5]]]
+];
+
 export default {
   data() {
     return {
-      dark: [false]
+      dark: [true],
+      schedule: mSchedule,
+      staffs: mStaffs
     };
   }
 };
