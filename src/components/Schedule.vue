@@ -244,9 +244,9 @@ export default {
         return this.dark[0] ? "grey darken-4" : "grey lighten-5";
       } else {
         if (this.staffs[this.selectedStaffIndex].workingTime[i][j]) {
-          return this.dark[0] ? "blue lighten-2" : "blue lighten-5";
+          return this.dark[0] ? "blue lignten-2" : "blue lighten-5";
         } else {
-          return this.dark[0] ? "red lighten-2" : "red lighten-5";
+          return this.dark[0] ? "red lighten-1" : "red lighten-5";
         }
       }
     },
@@ -311,6 +311,20 @@ export default {
             }
 
             if (!isStaffExist) {
+              let staff = {};
+              for (let staff1 of this.staffs) {
+                if (staff1.id == data.staff.id) {
+                  staff = staff1;
+                  break;
+                }
+              }
+              if (!staff.workingTime[day][time]) {
+                this.showSnackbar(
+                  "warning",
+                  "mdi-exclamation",
+                  `You are adding ${staff.firstName} ${staff.lastName} to the time which is not preferred!`
+                );
+              }
               if (data.isDeleted) {
                 this.schedule[data.day][data.time].splice(data.index, 1);
               }
@@ -318,10 +332,17 @@ export default {
                 this.schedule[day][time].push(data.staff);
               }
             } else {
+              let staff = {};
+              for (let staff1 of this.staffs) {
+                if (staff1.id == data.staff.id) {
+                  staff = staff1;
+                  break;
+                }
+              }
               this.showSnackbar(
                 "error",
                 "mdi-alert",
-                "The staff you selected already scheduled in the day!"
+                `${staff.firstName} ${staff.lastName} is already scheduled in the day!`
               );
             }
           } else {
