@@ -5,7 +5,7 @@
         <router-view
           :dark="dark"
           :schedule="schedule"
-          :staffs="staffs"
+          :users="users"
           style="width:100%;height:100%;"
         />
       </v-content>
@@ -21,7 +21,7 @@
 </style>
 
 <script>
-let mStaffs = [
+let mUsers = [
   {
     id: "s0000",
     firstName: "Super",
@@ -29,7 +29,7 @@ let mStaffs = [
     role: 0,
     phone: "0912345678",
     email: "vuetify@example.com",
-    color: "#E0E0E0",
+    color: "#2196F3",
     workingTime: [
       [true, true, true],
       [true, true, true],
@@ -44,7 +44,7 @@ let mStaffs = [
     id: "s0001",
     firstName: "Jason",
     lastName: "Chen",
-    role: 0,
+    role: 1,
     phone: "0912345678",
     email: "vuetify@example.com",
     color: "#E57373",
@@ -368,39 +368,39 @@ let mStaffs = [
 
 let mSchedule = [
   [
-    [mStaffs[18], mStaffs[1]],
-    [mStaffs[2], mStaffs[3]],
-    [mStaffs[4], mStaffs[5]]
+    [mUsers[1], mUsers[2]],
+    [mUsers[3], mUsers[4]],
+    [mUsers[5], mUsers[6]]
   ],
   [
-    [mStaffs[6], mStaffs[7]],
-    [mStaffs[8], mStaffs[9]],
-    [mStaffs[10], mStaffs[11]]
+    [mUsers[7], mUsers[8]],
+    [mUsers[9], mUsers[10]],
+    [mUsers[11], mUsers[12]]
   ],
   [
-    [mStaffs[12], mStaffs[13]],
-    [mStaffs[14], mStaffs[15]],
-    [mStaffs[16], mStaffs[17]]
+    [mUsers[13], mUsers[14]],
+    [mUsers[15], mUsers[16]],
+    [mUsers[17], mUsers[18]]
   ],
   [
-    [mStaffs[18], mStaffs[1]],
-    [mStaffs[2], mStaffs[3]],
-    [mStaffs[4], mStaffs[5]]
+    [mUsers[1], mUsers[2]],
+    [mUsers[3], mUsers[4]],
+    [mUsers[5], mUsers[6]]
   ],
   [
-    [mStaffs[6], mStaffs[7]],
-    [mStaffs[8], mStaffs[9]],
-    [mStaffs[10], mStaffs[11]]
+    [mUsers[7], mUsers[8]],
+    [mUsers[9], mUsers[10]],
+    [mUsers[11], mUsers[12]]
   ],
   [
-    [mStaffs[12], mStaffs[13]],
-    [mStaffs[14], mStaffs[15]],
-    [mStaffs[16], mStaffs[17]]
+    [mUsers[13], mUsers[14]],
+    [mUsers[15], mUsers[16]],
+    [mUsers[17], mUsers[18]]
   ],
   [
-    [mStaffs[18], mStaffs[1]],
-    [mStaffs[2], mStaffs[3]],
-    [mStaffs[4], mStaffs[5]]
+    [mUsers[1], mUsers[2]],
+    [mUsers[3], mUsers[4]],
+    [mUsers[5], mUsers[6]]
   ]
 ];
 
@@ -408,8 +408,8 @@ export default {
   data() {
     return {
       dark: [true],
-      schedule: mSchedule,
-      staffs: mStaffs
+      users: mUsers,
+      schedule: mSchedule
     };
   }
 };

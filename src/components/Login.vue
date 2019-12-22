@@ -45,7 +45,7 @@
       </v-card-text>
     </v-card>
 
-    <v-snackbar v-model="snackbar" :color="snackbarColor" bottom right>
+    <v-snackbar v-model="snackbar" :color="snackbarColor" timeout="2000" bottom right>
       <div class="d-flex flex-row justify-start align-center" style="width:100%;height:100%;">
         <v-icon dark v-text="snackbarIcon" />
         <div class="mx-5">{{snackbarMessage}}</div>
@@ -76,7 +76,7 @@ export default {
   },
   props: {
     dark: Array,
-    staffs: Array
+    users: Array
   },
   methods: {
     showSnackbar(color, icon, message) {
@@ -87,14 +87,14 @@ export default {
     },
     login() {
       if (this.id == "") {
-        this.showSnackbar("error", "mdi-alert", "Please enter your User ID!");
+        this.showSnackbar("error", "mdi-alert", "Please Enter Your ID!");
       } else if (this.password == "") {
-        this.showSnackbar("error", "mdi-alert", "Please enter your password!");
+        this.showSnackbar("error", "mdi-alert", "Please Enter Your Password!");
       } else {
         this.isLoading = true;
 
         let isUserExist = false;
-        for (let user of this.staffs) {
+        for (let user of this.users) {
           if (user.id == this.id) {
             isUserExist = true;
             break;
@@ -108,7 +108,7 @@ export default {
             this.showSnackbar(
               "error",
               "mdi-alert",
-              "User ID or Password error!"
+              "ID or Password Error!"
             );
           }
         }, 1000);

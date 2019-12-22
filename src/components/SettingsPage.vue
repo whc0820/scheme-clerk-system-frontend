@@ -35,7 +35,7 @@
             <div class="mb-2 text-left title">Profile Settings</div>
             <div class="mb-2 d-flex justify-space-between align-center">
               <div class="text-left body-2">Change personal details for your account</div>
-              <v-btn color="primary" @click="profileDialog = true">Edit</v-btn>
+              <v-btn color="primary" @click="onEditProfile()">Edit</v-btn>
             </div>
             <v-card width="100%" :dark="dark[0]">
               <v-card-text>
@@ -80,21 +80,29 @@
                           <v-text-field
                             type="text"
                             label="First Name*"
-                            :placeholder="user.firstName"
+                            v-model="firstName"
                           />
                         </v-col>
                         <v-col class="py-0" cols="6">
                           <v-text-field
                             type="text"
                             label="Last Name*"
-                            :placeholder="user.lastName"
+                            v-model="lastName"
                           />
                         </v-col>
                         <v-col class="py-0" cols="12">
-                          <v-text-field type="text" label="Phone*" :placeholder="user.phone" />
+                          <v-text-field
+                            type="text"
+                            label="Phone*"
+                            v-model="phone"
+                          />
                         </v-col>
                         <v-col class="py-0" cols="12">
-                          <v-text-field type="text" label="Email*" :placeholder="user.email" />
+                          <v-text-field
+                            type="text"
+                            label="Email*"
+                            v-model="email"
+                          />
                         </v-col>
                       </v-row>
 
@@ -102,7 +110,7 @@
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn text @click="profileDialog = false">Cancel</v-btn>
+                      <v-btn text @click="onCancelProfile()">Cancel</v-btn>
                       <v-btn text color="primary" @click="onSaveProfile()">Save</v-btn>
                     </v-card-actions>
                   </v-card>
@@ -128,7 +136,7 @@
 
             <div class="mb-2 text-left title">Theme Color</div>
             <div class="mb-2 text-left body-2">Select your favorite color for the theme</div>
-            <ColorPicker :dark="dark[0]" />
+            <ColorPicker :dark="dark[0]" :user="user" />
           </v-col>
           <v-col cols="12" v-else-if="selectedTab == 2">
             <div class="mb-2 text-left title">Security</div>
@@ -214,6 +222,14 @@ export default {
       isLoading: true,
       profileDialog: false,
       passwordDialog: false,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      phone: this.user.phone,
+      email: this.user.email,
+      cloneFirstName: "",
+      cloneLastName: "",
+      clonePhone: "",
+      cloneEmail: "",
       newPassword: "",
       verifyPassword: ""
     };
@@ -232,9 +248,27 @@ export default {
       this.snackbarIcon = icon;
       this.snackbarMessage = message;
     },
+    onEditProfile() {
+      this.profileDialog = true;
+      this.cloneFirstName = this.user.firstName;
+      this.cloneLastName = this.user.lastName;
+      this.clonePhone = this.user.phone;
+      this.cloneEmail = this.user.email;
+    },
+    onCancelProfile() {
+      this.profileDialog = false;
+      this.firstName = this.cloneFirstName;
+      this.lastName = this.cloneLastName;
+      this.phone = this.clonePhone;
+      this.email = this.cloneEmail;
+    },
     onSaveProfile() {
       this.showSnackbar("success", "mdi-check", "Profile Saved!");
       this.profileDialog = false;
+      this.user.firstName = this.firstName;
+      this.user.lastName = this.lastName;
+      this.user.phone = this.phone;
+      this.user.email = this.email;
     },
     onClickChangePassword() {
       this.passwordDialog = true;

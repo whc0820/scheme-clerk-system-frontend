@@ -50,7 +50,7 @@
       <v-col cols="12" lg="8">
         <v-expansion-panels :dark="dark[0]">
           <v-expansion-panel v-for="(staff,i) in staffs" :key="i">
-            <v-expansion-panel-header class="ma-0 px-4 py-4">
+            <v-expansion-panel-header class="ma-0 px-4 py-4" v-if="staff.role == 1">
               <div class="ma-0 pa-0 d-flex flex-row justify-start align-center">
                 <v-avatar :color="staff.color">
                   <span class="white--text" v-text="`${staff.firstName[0]}${staff.lastName[0]}`" />
@@ -126,12 +126,13 @@ export default {
       }
 
       let user = {
+        id: this.id,
         firstName: this.firstName,
         lastName: this.lastName,
-        id: this.id,
+        role: 1,
         phone: this.phone,
         email: this.email,
-        color: "blue lighten-2",
+        color: "#2196F3",
         workingTime: [
           [true, true, true],
           [true, true, true],

@@ -25,7 +25,8 @@ export default {
     };
   },
   props: {
-    dark: Boolean
+    dark: Boolean,
+    user: Object
   },
   computed: {
     color: {
@@ -36,6 +37,7 @@ export default {
         this[this.type] = v;
         this.$vuetify.theme.themes.light.primary = v;
         this.$vuetify.theme.themes.dark.primary = v;
+        this.user.color = this.hex;
       }
     }
   }

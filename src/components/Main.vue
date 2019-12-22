@@ -39,10 +39,10 @@
         :dark="dark"
         :user="user"
         :schedule="schedule"
-        :staffs="staffs"
+        :staffs="users"
         v-else-if="selectedIndex == 1"
       />
-      <StaffsPage :dark="dark" :user="user" :staffs="staffs" v-else-if="selectedIndex == 2" />
+      <StaffsPage :dark="dark" :user="user" :staffs="users" v-else-if="selectedIndex == 2" />
       <SettingsPage :dark="dark" :user="user" v-else-if="selectedIndex == 3" />
       <AboutPage :dark="dark" v-else-if="selectedIndex == 4" />
     </v-container>
@@ -94,30 +94,13 @@ export default {
           icon: "mdi-arrow-right-circle"
         }
       ],
-      user: {
-        id: "s0000",
-        firstName: "Super",
-        lastName: "Admin",
-        role: 0,
-        phone: "0912345678",
-        email: "vuetify@example.com",
-        workingTime: [
-          [true, true, true],
-          [true, true, true],
-          [true, true, true],
-          [true, true, true],
-          [true, true, true],
-          [true, true, true],
-          [true, true, true]
-        ],
-        color: "red lighten-2"
-      }
+      user: {}
     };
   },
   props: {
     dark: Array,
     schedule: Object,
-    staffs: Object
+    users: Object
   },
   components: {
     DashboardPage,
@@ -134,7 +117,7 @@ export default {
     }
   },
   created() {
-    for (let user of this.staffs) {
+    for (let user of this.users) {
       if (user.id == this.$route.query.id) {
         this.user = user;
         break;

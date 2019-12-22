@@ -20,9 +20,9 @@
               :effect-allowed="['copy']"
               drop-effect="copy"
             >
-              <v-chip outlined style="cursor:move">
-                <v-avatar left :color="staff.color">
-                  <span class="white--text" v-text="`${staff.firstName[0]}${staff.lastName[0]}`"></span>
+              <v-chip style="cursor:move" outlined :style="staff.role==0?'display:none':''">
+                <v-avatar :color="staff.color" left>
+                  <span class="white--text" v-text="`${staff.firstName[0]}${staff.lastName[0]}`" />
                 </v-avatar>
                 {{`${staff.firstName} ${staff.lastName}`}}
               </v-chip>
@@ -259,23 +259,27 @@ export default {
           if (data.isParent) {
             let isStaffExist = false;
             if (day != data.day) {
-              for (let t of this.schedule[day]) {
-                for (let staff of t) {
-                  for (let staff1 of this.schedule[data.day][data.time]) {
-                    if (staff.id == staff1.id) {
-                      isStaffExist = true;
-                      break;
+              for (let t in this.schedule[day]) {
+                if (t != time) {
+                  for (let staff of this.schedule[day][t]) {
+                    for (let staff1 of this.schedule[data.day][data.time]) {
+                      if (staff.id == staff1.id) {
+                        isStaffExist = true;
+                        break;
+                      }
                     }
                   }
                 }
               }
 
-              for (let t of this.schedule[data.day]) {
-                for (let staff of t) {
-                  for (let staff1 of this.schedule[day][time]) {
-                    if (staff.id == staff1.id) {
-                      isStaffExist = true;
-                      break;
+              for (let t in this.schedule[data.day]) {
+                if (t != data.time) {
+                  for (let staff of this.schedule[data.day][t]) {
+                    for (let staff1 of this.schedule[day][time]) {
+                      if (staff.id == staff1.id) {
+                        isStaffExist = true;
+                        break;
+                      }
                     }
                   }
                 }
