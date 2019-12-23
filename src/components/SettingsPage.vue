@@ -8,7 +8,12 @@
       </v-col>
 
       <v-col cols="12" class="ma-0 pa-0">
-        <v-tabs background-color="transparent" v-model="selectedTab" :dark="dark[0]">
+        <v-tabs
+          background-color="transparent"
+          v-model="selectedTab"
+          :dark="dark[0]"
+          color="primary"
+        >
           <v-tab v-for="(tab, i) in tabs" :key="i" v-text="tab" />
         </v-tabs>
         <v-divider :dark="dark[0]" />
@@ -77,32 +82,16 @@
                     <v-card-text>
                       <v-row>
                         <v-col class="py-0" cols="6">
-                          <v-text-field
-                            type="text"
-                            label="First Name*"
-                            v-model="firstName"
-                          />
+                          <v-text-field type="text" label="First Name*" v-model="firstName" />
                         </v-col>
                         <v-col class="py-0" cols="6">
-                          <v-text-field
-                            type="text"
-                            label="Last Name*"
-                            v-model="lastName"
-                          />
+                          <v-text-field type="text" label="Last Name*" v-model="lastName" />
                         </v-col>
                         <v-col class="py-0" cols="12">
-                          <v-text-field
-                            type="text"
-                            label="Phone*"
-                            v-model="phone"
-                          />
+                          <v-text-field type="text" label="Phone*" v-model="phone" />
                         </v-col>
                         <v-col class="py-0" cols="12">
-                          <v-text-field
-                            type="text"
-                            label="Email*"
-                            v-model="email"
-                          />
+                          <v-text-field type="text" label="Email*" v-model="email" />
                         </v-col>
                       </v-row>
 
@@ -119,13 +108,6 @@
             </v-card>
           </v-col>
           <v-col cols="12" v-else-if="selectedTab == 1">
-            <!-- <div class="mb-2 text-left title">Languages</div>
-              <v-card class="mb-5">
-                <v-card-text class="d-flex justify-center align-center">
-                  <v-select class="ma-0 pa-0" label="Change the languages" outlined></v-select>
-                </v-card-text>
-            </v-card>-->
-
             <div class="mb-2 text-left title">Dark Mode</div>
             <v-card class="mb-5" :dark="dark[0]">
               <v-card-text class="d-flex flex-row justify-space-between align-center">

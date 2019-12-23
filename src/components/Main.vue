@@ -43,7 +43,7 @@
         :events="events"
         v-else-if="selectedIndex == 1"
       />
-      <StaffsPage :dark="dark" :user="user" :staffs="users" v-else-if="selectedIndex == 2" />
+      <StaffsPage :dark="dark" :user="user" :staffs="users" :schedule="schedule" v-else-if="selectedIndex == 2" />
       <SettingsPage :dark="dark" :user="user" v-else-if="selectedIndex == 3" />
       <AboutPage :dark="dark" v-else-if="selectedIndex == 4" />
     </v-container>
