@@ -29,17 +29,18 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app :dark="dark[0]" clipped-left :color="dark[0]?'grey-darken-4':'grey-lighten-4'">
+    <v-app-bar app :dark="dark[0]" clipped-left :color="dark[0]?'grey-darken-4':'primary'">
       <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-app-bar>
 
     <v-container class="pa-0 ma-0" style="width:100%; height:100%;">
-      <DashboardPage :dark="dark" :schedule="schedule" v-if="selectedIndex == 0" />
+      <DashboardPage :dark="dark" :schedule="schedule" :events="events" v-if="selectedIndex == 0" />
       <SchedulePage
         :dark="dark"
         :user="user"
         :schedule="schedule"
         :staffs="users"
+        :events="events"
         v-else-if="selectedIndex == 1"
       />
       <StaffsPage :dark="dark" :user="user" :staffs="users" v-else-if="selectedIndex == 2" />
@@ -100,7 +101,8 @@ export default {
   props: {
     dark: Array,
     schedule: Object,
-    users: Object
+    users: Object,
+    events: Array
   },
   components: {
     DashboardPage,

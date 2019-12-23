@@ -10,6 +10,18 @@
         <v-divider :dark="dark[0]" />
       </v-col>
 
+      <v-col cols="12" lg="10" xl="6" v-if="user.role == 0">
+        <div class="mb-2 text-left title">Calendar</div>
+        <div class="mb-2 d-flex justify-space-between align-center">
+          <div class="text-left body-2">Manage the events</div>
+          <v-btn color="primary" @click="onEditEvents()">Edit</v-btn>
+        </div>
+
+        <v-col class="ma-0 pa-0" cols="12">
+          <Calendar :dark="dark" :events="events" />
+        </v-col>
+      </v-col>
+
       <v-col cols="12" xl="10">
         <div v-if="user.role == 0">
           <div class="mb-2 text-left title">Staffs' Working Time</div>
@@ -100,6 +112,91 @@
       </v-col>
     </v-row>
 
+    <v-dialog width="500" v-model="eventDialog" v-if="user.role == 0" scrollable>
+      <v-card :dark="dark[0]">
+        <v-card-title>
+          <span class="headline primary--text">Manage The Events</span>
+          <v-spacer />
+          <v-btn text icon large color="green" @click="onAddEvent()">
+            <v-icon large>mdi-plus</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col class="ma-0 py-0" cols="12" v-for="(event, i) in events" :key="i">
+              <v-col class="py-0 d-flex flex-row justify-start align-center" cols="12">
+                <v-sheet class="me-3" width="20px" height="20px" :color="event.color" />
+                <span class="me-5 body-2" v-text="event.name"></span>
+                <v-spacer />
+                <span class="me-2 body-2" v-text="event.start"></span>
+                <span class="me-2 body-2">~</span>
+                <span class="me-5 body-2" v-text="event.end"></span>
+                <v-btn text icon color="red" @click="onRemoveEvent(i)">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-col>
+              <v-divider />
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn text @click="onCancelEvents()">Cancel</v-btn>
+          <v-btn color="primary" text @click="onSaveEvents()">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog width="500" v-model="dateDialog" v-if="user.role == 0" scrollable>
+      <v-card :dark="dark[0]">
+        <v-card-title>
+          <span class="headline primary--text">Add New Event</span>
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col class="py-0" cols="12">
+              <v-text-field v-model="eventName" label="Event Name"></v-text-field>
+            </v-col>
+            <v-col class="py-0" cols="12">
+              <v-menu transition="scale-transition" offset-y min-width="290px">
+                <template v-slot:activator="{ on }">
+                  <v-text-field v-model="startDate" label="Start Date" readonly v-on="on" />
+                </template>
+                <v-date-picker v-model="startDate" :dark="dark[0]" no-title scrollable />
+              </v-menu>
+            </v-col>
+            <v-col class="py-0" cols="12">
+              <v-menu transition="scale-transition" offset-y min-width="290px">
+                <template v-slot:activator="{ on }">
+                  <v-text-field v-model="endDate" label="End Date" readonly v-on="on" />
+                </template>
+                <v-date-picker v-model="endDate" :dark="dark[0]" no-title scrollable />
+              </v-menu>
+            </v-col>
+            <v-col class="py-0 d-flex flex-row justify-start" cols="12">
+              <v-sheet
+                class="me-5 d-flex justify-center align-center"
+                width="20"
+                height="20"
+                style="cursor:pointer"
+                v-for="(sheet, i) in colors"
+                :color="sheet.color"
+                :key="i"
+                @click="onSelectEventColor(i)"
+              >
+                <v-icon size="15" v-if="sheet.isSelected" dark>mdi-check</v-icon>
+              </v-sheet>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn text @click="dateDialog = false">Cancel</v-btn>
+          <v-btn color="primary" text @click="onSaveAddEvent()">Done</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <v-snackbar v-model="snackbar" :color="snackbarColor" bottom right>
       <div class="d-flex flex-row justify-start align-center" style="width:100%;height:100%;">
         <v-icon dark v-text="snackbarIcon" />
@@ -110,6 +207,7 @@
 </template>
 
 <script>
+import Calendar from "./Calendar";
 import Schedule from "./Schedule";
 export default {
   data() {
@@ -117,6 +215,50 @@ export default {
       snackbarColor: "",
       snackbarIcon: "",
       snackbarMessage: "",
+      eventDialog: false,
+      dateDialog: false,
+      eventName: "",
+      startDate: "",
+      endDate: "",
+      selectedColorIndex: 0,
+      colors: [
+        {
+          isSelected: true,
+          color: "pink lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "deep-purple lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "blue lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "cyan lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "green lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "lime lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "amber lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "deep-orange lighten-2"
+        },
+        {
+          isSelected: false,
+          color: "blue-grey lighten-2"
+        }
+      ],
       isEditingSchedule: false,
       isEditingWorkingTime: false,
       weekdays: [
@@ -160,6 +302,7 @@ export default {
           text: "16 - 24"
         }
       ],
+      cloneEvents: [],
       cloneSchedule: [],
       cloneWorkingTime: []
     };
@@ -168,9 +311,11 @@ export default {
     dark: Object,
     user: Object,
     schedule: Object,
-    staffs: Object
+    staffs: Object,
+    events: Array
   },
   components: {
+    Calendar,
     Schedule
   },
   methods: {
@@ -209,11 +354,50 @@ export default {
         time
       ];
       this.$forceUpdate();
+    },
+    onEditEvents() {
+      this.eventDialog = true;
+      this.cloneEvents = JSON.parse(JSON.stringify(this.events));
+    },
+    onCancelEvents() {
+      this.eventDialog = false;
+      this.events = this.cloneEvents;
+    },
+    onSaveEvents() {
+      this.eventDialog = false;
+      this.showSnackbar("success", "mdi-check", "Changes Saved!");
+    },
+    onAddEvent() {
+      this.dateDialog = true;
+      this.onSelectEventColor(0);
+      this.eventName = "";
+      this.startDate = "";
+      this.endDate = "";
+    },
+    onSelectEventColor(index) {
+      this.selectedColorIndex = index;
+      for (let i in this.colors) {
+        if (i == index) {
+          this.colors[i].isSelected = true;
+        } else {
+          this.colors[i].isSelected = false;
+        }
+      }
+    },
+    onSaveAddEvent() {
+      this.dateDialog = false;
+      this.events.push({
+        name: this.eventName,
+        start: this.startDate,
+        end: this.endDate,
+        color: this.colors[this.selectedColorIndex].color
+      });
+    },
+    onRemoveEvent(i) {
+      this.events.splice(i, 1);
     }
   },
-  created() {
-
-  }
+  created() {}
 };
 </script>
 

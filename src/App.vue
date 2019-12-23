@@ -6,6 +6,7 @@
           :dark="dark"
           :schedule="schedule"
           :users="users"
+          :events="events"
           style="width:100%;height:100%;"
         />
       </v-content>
@@ -409,7 +410,51 @@ export default {
     return {
       dark: [true],
       users: mUsers,
-      schedule: mSchedule
+      schedule: mSchedule,
+      events: [
+        {
+          name: "Weekly Meeting",
+          start: "2019-12-02",
+          end: "2019-12-02",
+          color: "blue lighten-2"
+        },
+        {
+          name: "Weekly Meeting",
+          start: "2019-12-09",
+          end: "2019-12-09",
+          color: "blue lighten-2"
+        },
+        {
+          name: "Weekly Meeting",
+          start: "2019-12-16",
+          end: "2019-12-16",
+          color: "blue lighten-2"
+        },
+        {
+          name: "Weekly Meeting",
+          start: "2019-12-23",
+          end: "2019-12-23",
+          color: "blue lighten-2"
+        },
+        {
+          name: "Weekly Meeting",
+          start: "2019-12-30",
+          end: "2019-12-30",
+          color: "blue lighten-2"
+        },
+        {
+          name: "Christmas Holiday",
+          start: "2019-12-25",
+          end: "2019-12-26",
+          color: "pink lighten-2"
+        },
+        {
+          name: "New Year Holiday",
+          start: "2020-01-01",
+          end: "2020-01-04",
+          color: "green lighten-2"
+        }
+      ]
     };
   }
 };

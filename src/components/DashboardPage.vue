@@ -10,8 +10,8 @@
       <v-col class="mx-0 px-0" cols="12">
         <v-divider :dark="dark[0]" />
       </v-col>
-      <v-col cols="12" lg="6">
-        <Calendar :dark="dark" />
+      <v-col cols="12" lg="10" xl="6">
+        <Calendar :dark="dark" :events="events" />
       </v-col>
 
       <v-col cols="12" xl="10">
@@ -22,10 +22,6 @@
 </template>
 
 <style>
-.dark {
-  /* background: #000; */
-  color: #fff;
-}
 </style>
 
 <script>
@@ -40,7 +36,8 @@ export default {
   },
   props: {
     dark: Object,
-    schedule: Object
+    schedule: Object,
+    events: Array
   },
 
   components: {
