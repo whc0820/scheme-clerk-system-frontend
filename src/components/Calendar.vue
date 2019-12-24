@@ -1,11 +1,7 @@
 <template>
   <v-card :dark="dark[0]">
     <v-card-text>
-      <v-calendar
-        color="primary"
-        :events="events"
-        :event-color="getEventColor"
-      />
+      <v-calendar color="primary" :events="events" :event-color="getEventColor" event-more="false" />
     </v-card-text>
   </v-card>
 </template>

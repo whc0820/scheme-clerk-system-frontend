@@ -408,7 +408,7 @@ let mSchedule = [
 export default {
   data() {
     return {
-      dark: [true],
+      dark: [false],
       users: mUsers,
       schedule: mSchedule,
       events: [

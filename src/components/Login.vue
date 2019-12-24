@@ -6,6 +6,18 @@
   >
     <v-progress-linear absolute top indeterminate :active="isLoading" />
 
+    <v-tooltip :dark="dark[0]" color="transparent" transition="fade-transition" left>
+      <template v-slot:activator="{on}">
+        <v-btn v-on="on" :color="dark[0]?'white':'grey darken-1'" absolute top right icon>
+          <v-icon>mdi-information</v-icon>
+        </v-btn>
+      </template>
+      <span
+        class="body-2"
+        :class="dark[0]?'white--text':'primary--text'"
+      >Interaction Design Final Project - 1086035 Jason Chen</span>
+    </v-tooltip>
+
     <v-card
       class="pa-2 d-flex flex-column justify-center"
       width="380"
@@ -56,7 +68,7 @@
 
 <style>
 .dark {
-  background: #000;
+  background: #fff;
   color: #fff;
 }
 </style>
@@ -105,11 +117,7 @@ export default {
             this.$router.push({ path: "/main", query: { id: this.id } });
           } else {
             this.isLoading = false;
-            this.showSnackbar(
-              "error",
-              "mdi-alert",
-              "ID or Password Error!"
-            );
+            this.showSnackbar("error", "mdi-alert", "ID or Password Error!");
           }
         }, 1000);
       }

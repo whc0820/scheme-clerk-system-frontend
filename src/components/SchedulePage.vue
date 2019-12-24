@@ -124,14 +124,14 @@
         <v-card-text>
           <v-row>
             <v-col class="ma-0 py-0" cols="12" v-for="(event, i) in events" :key="i">
-              <v-col class="py-0 d-flex flex-row justify-start align-center" cols="12">
-                <v-sheet class="me-3" width="20px" height="20px" :color="event.color" />
-                <span class="me-5 body-2" v-text="event.name"></span>
+              <v-col class="pa-0 d-flex flex-row justify-start align-center" cols="12">
+                <v-sheet class="mx-3" width="20px" height="20px" :color="event.color" />
+                <span class="ms-1 body-2" v-text="event.name"></span>
                 <v-spacer />
                 <span class="me-2 body-2" v-text="event.start"></span>
                 <span class="me-2 body-2">~</span>
-                <span class="me-5 body-2" v-text="event.end"></span>
-                <v-btn text icon color="red" @click="onRemoveEvent(i)">
+                <span class="me-2 body-2" v-text="event.end"></span>
+                <v-btn class="me-1" text icon color="red" @click="onRemoveEvent(i)">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
               </v-col>
@@ -391,6 +391,9 @@ export default {
         start: this.startDate,
         end: this.endDate,
         color: this.colors[this.selectedColorIndex].color
+      });
+      this.events.sort((a, b) => {
+        return a.start > b.start ? 1 : -1;
       });
     },
     onRemoveEvent(i) {

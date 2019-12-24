@@ -60,9 +60,9 @@
         <v-card-text>
           <v-row>
             <v-col class="py-0" cols="12" v-for="(staff,i) in staffs" :key="i">
-              <div class="ms-3 d-flex flex-row justify-start align-center" v-if="staff.role == 1">
-                <v-sheet class="me-5" width="20" height="20" :color="staff.color" />
-                <span class="me-5 body-2" v-text="staff.id" />
+              <div class="ms-3 pa-0 d-flex flex-row justify-start align-center" v-if="staff.role == 1">
+                <v-sheet class="me-4" width="20" height="20" :color="staff.color" />
+                <span class="me-3 body-2" v-text="staff.id" />
                 <span class="body-2" v-text="`${staff.firstName} ${staff.lastName}`" />
                 <v-spacer />
                 <v-btn icon>
@@ -223,6 +223,10 @@ export default {
         ]
       };
       this.staffs.push(user);
+      this.staffs.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      });
+
       this.staffDialog = false;
       this.showSnackbar(
         "success",
