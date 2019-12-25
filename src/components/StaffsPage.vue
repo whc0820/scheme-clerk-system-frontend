@@ -150,9 +150,9 @@ export default {
   props: {
     dark: Array,
     user: Object,
-    staffs: Object,
-    schedule: Object,
-    history: Object
+    staffs: Array,
+    schedule: Array,
+    history: Array
   },
   methods: {
     showSnackbar(color, icon, message) {
@@ -180,8 +180,8 @@ export default {
     },
     onCancelStaffs() {
       this.editDialog = false;
-      this.staffs = this.cloneStaffs1;
-      this.schedule = this.cloneSchedule;
+      // this.staffs = this.cloneStaffs1;
+      // this.schedule = this.cloneSchedule;
     },
     onSaveStaffs() {
       this.editDialog = false;
@@ -248,11 +248,6 @@ export default {
       this.addHistory(`Add new staff - ${this.firstName} ${this.lastName}`);
 
       this.staffDialog = false;
-      this.showSnackbar(
-        "success",
-        "mdi-check",
-        `New Staff: ${this.firstName} ${this.lastName} Added!`
-      );
     }
   }
 };

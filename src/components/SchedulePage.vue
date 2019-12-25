@@ -212,6 +212,7 @@ import Schedule from "./Schedule";
 export default {
   data() {
     return {
+      snackbar: false,
       snackbarColor: "",
       snackbarIcon: "",
       snackbarMessage: "",
@@ -308,12 +309,12 @@ export default {
     };
   },
   props: {
-    dark: Object,
+    dark: Array,
     user: Object,
-    schedule: Object,
-    staffs: Object,
-    events: Object,
-    history: Object
+    schedule: Array,
+    staffs: Array,
+    events: Array,
+    history: Array
   },
   components: {
     Calendar,
@@ -348,7 +349,7 @@ export default {
     },
     onCancelSchedule() {
       this.isEditingSchedule = !this.isEditingSchedule;
-      this.schedule = this.cloneSchedule;
+      // this.schedule = this.cloneSchedule;
     },
     onEditWorkingTime() {
       this.cloneWorkingTime = JSON.parse(JSON.stringify(this.user.workingTime));
@@ -375,7 +376,7 @@ export default {
     },
     onCancelEvents() {
       this.eventDialog = false;
-      this.events = this.cloneEvents;
+      // this.events = this.cloneEvents;
     },
     onSaveEvents() {
       this.eventDialog = false;

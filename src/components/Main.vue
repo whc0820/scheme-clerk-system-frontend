@@ -108,10 +108,10 @@ export default {
   },
   props: {
     dark: Array,
-    schedule: Object,
-    users: Object,
+    schedule: Array,
+    users: Array,
     events: Array,
-    history: Object
+    history: Array
   },
   components: {
     DashboardPage,

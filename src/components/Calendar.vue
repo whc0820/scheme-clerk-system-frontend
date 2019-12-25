@@ -1,7 +1,7 @@
 <template>
   <v-card :dark="dark[0]">
     <v-card-text>
-      <v-calendar color="primary" :events="events" :event-color="getEventColor" event-more="false" />
+      <v-calendar color="primary" :events="events" :event-color="getEventColor" :event-more="more" />
     </v-card-text>
   </v-card>
 </template>
@@ -9,7 +9,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      more: false
+    };
   },
   props: {
     dark: Array,

@@ -4,11 +4,17 @@
       <v-col class="d-flex flex-column" cols="12">
         <div class="mb-6 display-1">History</div>
         <v-divider class="mb-6" :dark="dark[0]" />
-        <v-col cols="6">
+        <v-col cols="12" lg="6" v-if="history.length > 0">
           <v-timeline :dark="dark[0]" dense>
-            <v-timeline-item v-for="(item, i) in history.slice().reverse()" :key="i" :color="item.color" small right>
+            <v-timeline-item
+              v-for="(item, i) in history.slice().reverse()"
+              :key="i"
+              :color="item.color"
+              small
+              right
+            >
               <div class="py-2 d-flex flex-row align-center">
-                <span class="body-2 me-10" v-text="item.time" />
+                <span class="body-2 me-5" v-text="item.time" />
                 <span class="body-2" v-text="item.content" />
 
                 <v-spacer />
@@ -18,6 +24,7 @@
             </v-timeline-item>
           </v-timeline>
         </v-col>
+        <span class="body-2" v-else>There is no history yet!</span>
       </v-col>
     </v-row>
   </v-container>
@@ -26,9 +33,9 @@
 <script>
 export default {
   props: {
-    dark: Object,
+    dark: Array,
     user: Object,
-    history: Object
+    history: Array
   }
 };
 </script>

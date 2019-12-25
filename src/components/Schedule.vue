@@ -218,10 +218,10 @@ export default {
     };
   },
   props: {
-    dark: Object,
+    dark: Array,
     isEditing: Boolean,
-    schedule: Object,
-    staffs: Object
+    schedule: Array,
+    staffs: Array
   },
   components: {
     Drag,

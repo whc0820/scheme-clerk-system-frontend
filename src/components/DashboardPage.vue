@@ -35,8 +35,8 @@ export default {
     };
   },
   props: {
-    dark: Object,
-    schedule: Object,
+    dark: Array,
+    schedule: Array,
     events: Array
   },
 
