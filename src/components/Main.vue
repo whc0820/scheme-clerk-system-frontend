@@ -41,11 +41,19 @@
         :schedule="schedule"
         :staffs="users"
         :events="events"
+        :history="history"
         v-else-if="selectedIndex == 1"
       />
-      <StaffsPage :dark="dark" :user="user" :staffs="users" :schedule="schedule" v-else-if="selectedIndex == 2" />
-      <SettingsPage :dark="dark" :user="user" v-else-if="selectedIndex == 3" />
-      <AboutPage :dark="dark" v-else-if="selectedIndex == 4" />
+      <StaffsPage
+        :dark="dark"
+        :user="user"
+        :staffs="users"
+        :schedule="schedule"
+        :history="history"
+        v-else-if="selectedIndex == 2"
+      />
+      <HistoryPage :dark="dark" :user="user" :history="history" v-else-if="selectedIndex == 3" />
+      <SettingsPage :dark="dark" :user="user" v-else-if="selectedIndex == 4" />
     </v-container>
   </v-content>
 </template>
@@ -62,7 +70,7 @@ import DashboardPage from "./DashboardPage";
 import SchedulePage from "./SchedulePage";
 import StaffsPage from "./StaffsPage";
 import SettingsPage from "./SettingsPage";
-import AboutPage from "./AboutPage";
+import HistoryPage from "./HistoryPage";
 
 export default {
   data() {
@@ -83,12 +91,12 @@ export default {
           icon: "mdi-account-multiple-outline"
         },
         {
-          text: "Settings",
-          icon: "mdi-settings-outline"
-        },
-        {
           text: "History",
           icon: "mdi-history"
+        },
+        {
+          text: "Settings",
+          icon: "mdi-settings-outline"
         },
         {
           text: "Logout",
@@ -102,14 +110,15 @@ export default {
     dark: Array,
     schedule: Object,
     users: Object,
-    events: Array
+    events: Array,
+    history: Object
   },
   components: {
     DashboardPage,
     SchedulePage,
     StaffsPage,
     SettingsPage,
-    AboutPage
+    HistoryPage
   },
   methods: {
     onDrawerItemClick(index) {

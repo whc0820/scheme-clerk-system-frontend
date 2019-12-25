@@ -60,7 +60,10 @@
         <v-card-text>
           <v-row>
             <v-col class="py-0" cols="12" v-for="(staff,i) in staffs" :key="i">
-              <div class="ms-3 pa-0 d-flex flex-row justify-start align-center" v-if="staff.role == 1">
+              <div
+                class="ms-3 pa-0 d-flex flex-row justify-start align-center"
+                v-if="staff.role == 1"
+              >
                 <v-sheet class="me-4" width="20" height="20" :color="staff.color" />
                 <span class="me-3 body-2" v-text="staff.id" />
                 <span class="body-2" v-text="`${staff.firstName} ${staff.lastName}`" />
@@ -148,7 +151,8 @@ export default {
     dark: Array,
     user: Object,
     staffs: Object,
-    schedule: Object
+    schedule: Object,
+    history: Object
   },
   methods: {
     showSnackbar(color, icon, message) {
@@ -156,6 +160,17 @@ export default {
       this.snackbarColor = color;
       this.snackbarIcon = icon;
       this.snackbarMessage = message;
+    },
+    addHistory(content) {
+      let date = new Date();
+      this.history.push({
+        id: this.user.id,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        color: this.user.color,
+        time: `${date.getHours()}:${date.getMinutes()}`,
+        content: content
+      });
     },
     onEditStaffs() {
       this.editDialog = true;
@@ -182,6 +197,9 @@ export default {
       // }
     },
     onRemoveStaff(index) {
+      this.addHistory(
+        `Remove staff - ${this.staffs[index].firstName} ${this.staffs[index].lastName}`
+      );
       // this.removedStaffs.push(this.staffs[index].id);
 
       for (let i in this.schedule) {
@@ -226,6 +244,8 @@ export default {
       this.staffs.sort((a, b) => {
         return a.id > b.id ? 1 : -1;
       });
+
+      this.addHistory(`Add new staff - ${this.firstName} ${this.lastName}`);
 
       this.staffDialog = false;
       this.showSnackbar(

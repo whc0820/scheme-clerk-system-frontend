@@ -312,7 +312,8 @@ export default {
     user: Object,
     schedule: Object,
     staffs: Object,
-    events: Array
+    events: Object,
+    history: Object
   },
   components: {
     Calendar,
@@ -325,6 +326,17 @@ export default {
       this.snackbarIcon = icon;
       this.snackbarMessage = message;
     },
+    addNewHistory(content) {
+      let date = new Date();
+      this.history.push({
+        id: this.user.id,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        color: this.user.color,
+        time: `${date.getHours()}:${date.getMinutes()}`,
+        content: content
+      });
+    },
     onEditSchedule() {
       this.isEditingSchedule = !this.isEditingSchedule;
       this.cloneSchedule = JSON.parse(JSON.stringify(this.schedule));
@@ -332,6 +344,7 @@ export default {
     onSaveSchedule(schedule) {
       this.isEditingSchedule = !this.isEditingSchedule;
       this.schedule = schedule;
+      this.addNewHistory("Release new schedule");
     },
     onCancelSchedule() {
       this.isEditingSchedule = !this.isEditingSchedule;
@@ -347,6 +360,7 @@ export default {
     },
     onSaveWorkingTime() {
       this.isEditingWorkingTime = !this.isEditingWorkingTime;
+      this.addNewHistory(`Update Working Time`);
       this.showSnackbar("success", "mdi-check", "Changes Saved!");
     },
     onSelectTime(weekday, time) {
@@ -395,8 +409,11 @@ export default {
       this.events.sort((a, b) => {
         return a.start > b.start ? 1 : -1;
       });
+
+      this.addNewHistory(`Add new event - ${this.eventName}`);
     },
     onRemoveEvent(i) {
+      this.addNewHistory(`Remove event - ${this.events[i].name}`);
       this.events.splice(i, 1);
     }
   },

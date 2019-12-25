@@ -7,6 +7,7 @@
           :schedule="schedule"
           :users="users"
           :events="events"
+          :history="history"
           style="width:100%;height:100%;"
         />
       </v-content>
@@ -368,42 +369,24 @@ let mUsers = [
 ];
 
 let mSchedule = [
-  [
-    [mUsers[1], mUsers[2]],
-    [mUsers[3], mUsers[4]],
-    [mUsers[5], mUsers[6]]
-  ],
-  [
-    [mUsers[7], mUsers[8]],
-    [mUsers[9], mUsers[10]],
-    [mUsers[11], mUsers[12]]
-  ],
+  [[mUsers[1], mUsers[2]], [mUsers[3], mUsers[4]], [mUsers[5], mUsers[6]]],
+  [[mUsers[7], mUsers[8]], [mUsers[9], mUsers[10]], [mUsers[11], mUsers[12]]],
   [
     [mUsers[13], mUsers[14]],
     [mUsers[15], mUsers[16]],
     [mUsers[17], mUsers[18]]
   ],
-  [
-    [mUsers[1], mUsers[2]],
-    [mUsers[3], mUsers[4]],
-    [mUsers[5], mUsers[6]]
-  ],
-  [
-    [mUsers[7], mUsers[8]],
-    [mUsers[9], mUsers[10]],
-    [mUsers[11], mUsers[12]]
-  ],
+  [[mUsers[1], mUsers[2]], [mUsers[3], mUsers[4]], [mUsers[5], mUsers[6]]],
+  [[mUsers[7], mUsers[8]], [mUsers[9], mUsers[10]], [mUsers[11], mUsers[12]]],
   [
     [mUsers[13], mUsers[14]],
     [mUsers[15], mUsers[16]],
     [mUsers[17], mUsers[18]]
   ],
-  [
-    [mUsers[1], mUsers[2]],
-    [mUsers[3], mUsers[4]],
-    [mUsers[5], mUsers[6]]
-  ]
+  [[mUsers[1], mUsers[2]], [mUsers[3], mUsers[4]], [mUsers[5], mUsers[6]]]
 ];
+
+let mHistory = [];
 
 export default {
   data() {
@@ -411,6 +394,7 @@ export default {
       dark: [false],
       users: mUsers,
       schedule: mSchedule,
+      history: mHistory,
       events: [
         {
           name: "Weekly Meeting",

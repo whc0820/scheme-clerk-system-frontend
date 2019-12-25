@@ -8,22 +8,17 @@
 
     <v-tooltip :dark="dark[0]" color="transparent" transition="fade-transition" left>
       <template v-slot:activator="{on}">
-        <v-btn
+        <v-icon
+        class="ma-5"
           v-on="on"
           :color="dark[0]?'white':'grey darken-2'"
-          style="cursor:default"
-          absolute
-          top
-          right
-          icon
-        >
-          <v-icon>mdi-information-outline</v-icon>
-        </v-btn>
+          style="position:absolute;top:0;right:0;cursor:default"
+        >mdi-information-outline</v-icon>
       </template>
       <span
         class="body-2"
         :class="dark[0]?'white--text':'primary--text'"
-      >Interaction Design Final Project - 1086035 Jason Chen</span>
+      >Interaction Design Final Project - Jason Chen 1086035</span>
     </v-tooltip>
 
     <v-card
