@@ -1,9 +1,9 @@
 <template>
   <v-card :dark="dark[0]">
-    <v-card-text>
+    <v-card-text class="pb-0">
       <v-row>
         <v-col class="ma-0 py-0" cols="12" v-if="isEditing">
-          <div class="my-1 caption">1. Click a staff to see which working time is prefered.</div>
+          <div class="my-1 caption">1. Click a staff to see which working time is preferred.</div>
           <div class="my-1 caption">2. Drag and drop the staff to the schedule below.</div>
           <div class="my-1 caption">3. You can also swap between the blocks.</div>
           <v-chip-group
@@ -147,14 +147,14 @@
           <v-btn class="mx-2" color="primary" text @click="onClickSaveChanges()">Save</v-btn>
         </v-col>
       </v-row>
-
-      <v-snackbar v-model="snackbar" :color="snackbarColor" bottom right>
-        <div class="d-flex flex-row justify-start align-center" style="width:100%;height:100%;">
-          <v-icon dark v-text="snackbarIcon" />
-          <div class="mx-5">{{snackbarMessage}}</div>
-        </div>
-      </v-snackbar>
     </v-card-text>
+
+    <v-snackbar v-model="snackbar" :color="snackbarColor" bottom right>
+      <div class="d-flex flex-row justify-start align-center" style="width:100%;height:100%;">
+        <v-icon dark v-text="snackbarIcon" />
+        <div class="mx-5">{{snackbarMessage}}</div>
+      </div>
+    </v-snackbar>
   </v-card>
 </template>
 

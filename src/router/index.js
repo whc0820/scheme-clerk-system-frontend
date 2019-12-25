@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
-import HelloWorld from '../components/HelloWorld.vue'
 import Main from '../components/Main.vue'
 import NotFound from '../components/NotFound.vue'
 
@@ -16,11 +15,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
-  },
-  {
-    path: '/hello',
-    name: 'helloworld',
-    component: HelloWorld
   },
   {
     path: '/main',
