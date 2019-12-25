@@ -97,34 +97,39 @@
                       drop-effect="link"
                       @dragstart="handleChildDragstart"
                     >
-                      <v-chip
-                        class="my-1 hidden-sm-and-down"
-                        :close="isEditing"
-                        :style="isEditing?'cursor:move':'cursor:default'"
-                        outlined
-                        @click:close="onClickClose(i, j, k)"
-                      >
-                        <v-avatar left :color="staff.color">
-                          <span
-                            class="white--text"
-                            v-text="`${staff.firstName[0]}${staff.lastName[0]}`"
-                          />
-                        </v-avatar>
-                        {{staff.id}}
-                      </v-chip>
-
-                      <v-avatar
-                        class="d-md-none"
-                        size="32"
-                        v-for="(staff, k) in workday[j]"
-                        :key="k"
+                      <v-tooltip
+                        :dark="dark[0]"
                         :color="staff.color"
+                        transition="fade-transition"
+                        right
                       >
-                        <span
-                          class="white--text"
-                          v-text="`${staff.firstName[0]}${staff.lastName[0]}`"
-                        />
-                      </v-avatar>
+                        <template v-slot:activator="{on}">
+                          <v-chip
+                            class="my-1 hidden-sm-and-down"
+                            :close="isEditing"
+                            :style="isEditing?'cursor:move':'cursor:default'"
+                            v-on="on"
+                            outlined
+                            @click:close="onClickClose(i, j, k)"
+                          >
+                            <v-avatar left :color="staff.color">
+                              <span
+                                class="white--text"
+                                v-text="`${staff.firstName[0]}${staff.lastName[0]}`"
+                              />
+                            </v-avatar>
+                            {{staff.id}}
+                          </v-chip>
+
+                          <v-avatar class="d-md-none" size="32" v-on="on" :color="staff.color">
+                            <span
+                              class="white--text"
+                              v-text="`${staff.firstName[0]}${staff.lastName[0]}`"
+                            />
+                          </v-avatar>
+                        </template>
+                        <span class="body-2" v-text="`${staff.firstName} ${staff.lastName}`" />
+                      </v-tooltip>
                     </drag>
                   </drop>
                 </drag>
@@ -243,10 +248,12 @@ export default {
       if (!this.isEditing) {
         return this.dark[0] ? "grey darken-4" : "grey lighten-5";
       } else {
-        if (this.staffs[this.selectedStaffIndex].workingTime[i][j]) {
-          return this.dark[0] ? "blue lignten-2" : "blue lighten-5";
+        if (this.staffs[this.selectedStaffIndex].role == 0) {
+          return this.dark[0] ? "grey darken-4" : "grey lighten-5";
+        } else if (this.staffs[this.selectedStaffIndex].workingTime[i][j]) {
+          return this.dark[0] ? "blue lighten-2" : "blue lighten-5";
         } else {
-          return this.dark[0] ? "red lighten-1" : "red lighten-5";
+          return this.dark[0] ? "pink lighten-2" : "pink lighten-5";
         }
       }
     },

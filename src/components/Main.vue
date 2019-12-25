@@ -72,27 +72,27 @@ export default {
       drawerItems: [
         {
           text: "Dashboard",
-          icon: "mdi-view-dashboard"
+          icon: "mdi-view-dashboard-outline"
         },
         {
           text: "Schedule",
-          icon: "mdi-calendar"
+          icon: "mdi-calendar-outline"
         },
         {
           text: "Staffs",
-          icon: "mdi-account-multiple"
+          icon: "mdi-account-multiple-outline"
         },
         {
           text: "Settings",
-          icon: "mdi-settings"
+          icon: "mdi-settings-outline"
         },
         {
-          text: "About",
-          icon: "mdi-information"
+          text: "History",
+          icon: "mdi-history"
         },
         {
           text: "Logout",
-          icon: "mdi-arrow-right-circle"
+          icon: "mdi-login-variant"
         }
       ],
       user: {}

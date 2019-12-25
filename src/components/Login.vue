@@ -8,8 +8,16 @@
 
     <v-tooltip :dark="dark[0]" color="transparent" transition="fade-transition" left>
       <template v-slot:activator="{on}">
-        <v-btn v-on="on" :color="dark[0]?'white':'grey darken-1'" absolute top right icon>
-          <v-icon>mdi-information</v-icon>
+        <v-btn
+          v-on="on"
+          :color="dark[0]?'white':'grey darken-2'"
+          style="cursor:default"
+          absolute
+          top
+          right
+          icon
+        >
+          <v-icon>mdi-information-outline</v-icon>
         </v-btn>
       </template>
       <span
