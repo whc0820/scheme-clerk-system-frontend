@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row align-content="start" class="px-5">
-      <v-col cols="12">
+    <v-row align-content="start">
+      <v-col class="mx-2" cols="12">
         <v-row justify="space-between">
           <div class="display-1">Staffs</div>
         </v-row>

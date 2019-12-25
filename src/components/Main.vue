@@ -33,7 +33,7 @@
       <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-app-bar>
 
-    <v-container class="pa-0 ma-0" style="width:100%; height:100%;">
+    <div style="width:100%; height:100%;">
       <DashboardPage :dark="dark" :schedule="schedule" :events="events" v-if="selectedIndex == 0" />
       <SchedulePage
         :dark="dark"
@@ -54,7 +54,7 @@
       />
       <HistoryPage :dark="dark" :user="user" :history="history" v-else-if="selectedIndex == 3" />
       <SettingsPage :dark="dark" :user="user" v-else-if="selectedIndex == 4" />
-    </v-container>
+    </div>
   </v-content>
 </template>
 

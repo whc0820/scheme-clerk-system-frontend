@@ -34,20 +34,22 @@
           <v-divider />
         </v-col>
 
-        <v-col class="ma-0 py-0 d-flex flex-column justify-space-around" cols="2">
-          <v-sheet class="mb-5" height="50" color="transparent" />
-          <v-sheet
-            class="mb-5 d-flex justify-center align-center"
-            height="100"
-            :color="dark[0]?'grey darken-4':'grey lighten-5'"
-            v-for="(item, i) in times"
-            :key="i"
-          >
-            <div class="body-1" v-text="item.text" />
-          </v-sheet>
+        <v-col class="ma-0 py-0" cols="0" md="2" lg="2" xl="2">
+          <div class="hidden-sm-and-down">
+            <v-sheet class="mb-5" height="50" color="transparent" />
+            <v-sheet
+              class="mb-5 d-flex justify-center align-center"
+              height="100"
+              :color="dark[0]?'grey darken-4':'grey lighten-5'"
+              v-for="(item, i) in times"
+              :key="i"
+            >
+              <div class="body-1" v-text="item.text" />
+            </v-sheet>
+          </div>
         </v-col>
 
-        <v-col class="ma-0 pa-0" cols="10">
+        <v-col class="ma-0 pa-0" cols="12" md="10" lg="10" xl="10">
           <v-col class="ma-0 py-0 d-flex flex-row justify-space-around" cols="12">
             <v-sheet
               class="mx-2 mb-5 d-flex justify-center align-center"
@@ -105,7 +107,7 @@
                       >
                         <template v-slot:activator="{on}">
                           <v-chip
-                            class="my-1 hidden-sm-and-down"
+                            class="my-1 hidden-md-and-down"
                             :close="isEditing"
                             :style="isEditing?'cursor:move':'cursor:default'"
                             v-on="on"
@@ -121,7 +123,13 @@
                             {{staff.id}}
                           </v-chip>
 
-                          <v-avatar class="d-md-none" size="32" v-on="on" :color="staff.color">
+                          <v-avatar
+                            class="d-lg-none"
+                            size="32"
+                            v-on="on"
+                            :color="staff.color"
+                            @click="onClickClose(i,j,k)"
+                          >
                             <span
                               class="white--text"
                               v-text="`${staff.firstName[0]}${staff.lastName[0]}`"
@@ -242,7 +250,9 @@ export default {
       this.$emit("saveFromSchedule", this.schedule);
     },
     onClickClose(day, time, index) {
-      this.schedule[day][time].splice(index, 1);
+      if (this.isEditing) {
+        this.schedule[day][time].splice(index, 1);
+      }
     },
     setBackgroundColor(i, j) {
       if (!this.isEditing) {

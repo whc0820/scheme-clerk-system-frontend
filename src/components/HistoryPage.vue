@@ -1,8 +1,8 @@
 <template>
-  <v-container class="px-5">
+  <v-container>
     <v-row>
       <v-col class="d-flex flex-column" cols="12">
-        <div class="mb-6 display-1">History</div>
+        <div class="mx-1 mb-6 display-1">History</div>
         <v-divider class="mb-6" :dark="dark[0]" />
         <v-col cols="12" lg="6" v-if="history.length > 0">
           <v-timeline :dark="dark[0]" dense>
@@ -24,7 +24,7 @@
             </v-timeline-item>
           </v-timeline>
         </v-col>
-        <span class="body-2" v-else>There is no history yet!</span>
+        <span class="mx-2 body-2" v-else>There is no history yet!</span>
       </v-col>
     </v-row>
   </v-container>

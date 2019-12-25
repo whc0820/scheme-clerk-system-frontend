@@ -1,7 +1,7 @@
 <template>
-  <v-container style="width:100%;height:100%">
-    <v-row align-content="start" class="px-5">
-      <v-col cols="12">
+  <v-container style="width:100%;height:100%;">
+    <v-row align-content="start">
+      <v-col class="mx-2" cols="12">
         <v-row justify="start">
           <div class="display-1">Dashboard</div>
         </v-row>
