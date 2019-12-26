@@ -161,14 +161,23 @@ export default {
       this.snackbarIcon = icon;
       this.snackbarMessage = message;
     },
+    addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    },
     addHistory(content) {
       let date = new Date();
+      let hours = this.addZero(date.getHours());
+      let minutes = this.addZero(date.getMinutes());
+
       this.history.push({
         id: this.user.id,
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         color: this.user.color,
-        time: `${date.getHours()}:${date.getMinutes()}`,
+        time: `${hours}:${minutes}`,
         content: content
       });
     },

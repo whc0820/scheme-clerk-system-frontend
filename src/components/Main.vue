@@ -29,7 +29,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app dark clipped-left :color="dark[0]?'grey-darken-4':'primary'">
+    <v-app-bar app dark clipped-left :color="dark[0]?'primary':'primary'">
       <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-app-bar>
 
