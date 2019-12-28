@@ -54,7 +54,7 @@
           <span class="headline primary--text">Manage the staffs</span>
           <v-spacer />
           <v-btn icon>
-            <v-icon color="green" @click="staffDialog = true" large>mdi-plus</v-icon>
+            <v-icon color="green" @click="onAddStaff()" large>mdi-plus</v-icon>
           </v-btn>
         </v-card-title>
         <v-card-text>
@@ -91,14 +91,14 @@
         </v-card-title>
         <v-card-text>
           <v-row>
+            <v-col cols="12" class="py-0">
+              <v-text-field v-model="id" label="ID*" required />
+            </v-col>
             <v-col cols="6" class="py-0">
               <v-text-field v-model="firstName" label="First Name*" required />
             </v-col>
             <v-col cols="6" class="py-0">
               <v-text-field v-model="lastName" label="Last Name*" required />
-            </v-col>
-            <v-col cols="12" class="py-0">
-              <v-text-field v-model="id" label="ID*" required />
             </v-col>
             <v-col cols="12" class="py-0">
               <v-text-field v-model="phone" label="Phone*" required />
@@ -204,6 +204,24 @@ export default {
       //     }
       //   }
       // }
+    },
+    onAddStaff() {
+      this.staffDialog = true;
+
+      let id = this.staffs.length;
+      if (id < 10) {
+        this.id = `s000${id}`;
+      } else if (id < 100) {
+        this.id = `s00${id}`;
+      } else if (id < 1000) {
+        this.id = `s0${id}`;
+      } else if (id < 10000) {
+        this.id = `s${id}`;
+      }
+      this.firstName = "";
+      this.lastName = "";
+      this.phone = "0912345678";
+      this.email = "vuetify@example.com";
     },
     onRemoveStaff(index) {
       this.addHistory(

@@ -77,7 +77,7 @@
             </v-card>
           </v-col>
           <v-col cols="12" v-else-if="selectedTab == 1">
-            <div class="mb-2 text-left title">Dark Mode</div>
+            <div class="mb-4 text-left title">Dark Mode</div>
             <v-card class="mb-5" :dark="dark[0]">
               <v-card-text class="d-flex flex-row justify-space-between align-center">
                 <div class="text-left body-2">Enable dark mode</div>

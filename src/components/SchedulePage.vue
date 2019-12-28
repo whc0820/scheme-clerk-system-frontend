@@ -47,20 +47,28 @@
           <v-card class="mb-5" :dark="dark[0]">
             <v-card-text>
               <v-row>
-                <v-col class="ma-0 py-0 d-flex flex-column justify-space-around" cols="2">
-                  <v-sheet class="mb-5" height="50" color="transparent" />
-                  <v-sheet
-                    class="mb-5 d-flex justify-center align-center"
-                    height="50"
-                    :color="dark[0]?'grey darken-4':'grey lighten-4'"
-                    v-for="(item, i) in times"
-                    :key="i"
-                  >
-                    <div class="body-1" v-text="item.text" />
-                  </v-sheet>
+                <v-col
+                  class="ma-0 py-0 d-flex flex-column justify-space-around"
+                  cols="0"
+                  md="2"
+                  lg="2"
+                  xl="2"
+                >
+                  <div class="hidden-sm-and-down">
+                    <v-sheet class="mb-5" height="50" color="transparent" />
+                    <v-sheet
+                      class="mb-5 d-flex justify-center align-center"
+                      height="50"
+                      :color="dark[0]?'grey darken-4':'grey lighten-4'"
+                      v-for="(item, i) in times"
+                      :key="i"
+                    >
+                      <div class="body-1" v-text="item.text" />
+                    </v-sheet>
+                  </div>
                 </v-col>
 
-                <v-col class="ma-0 pa-0" cols="10">
+                <v-col class="ma-0 pa-0" cols="12" md="10" lg="10" xl="10">
                   <v-col class="ma-0 py-0 d-flex flex-row justify-space-around" cols="12">
                     <v-sheet
                       class="mx-2 mb-5 d-flex justify-center align-center"
@@ -80,20 +88,20 @@
                       v-for="(workday, i) in user.workingTime"
                       :key="i"
                     >
-                      <v-btn
+                      <v-sheet
                         class="mb-5 d-flex justify-center align-center"
                         width="100%"
                         height="50"
-                        :color="weekdays[i].color"
-                        :outlined="isEditingWorkingTime"
-                        :disabled="!isEditingWorkingTime"
+                        :color="dark[0]?'grey darken-4':'grey lighten-5'"
                         v-for="(time, j) in workday.length"
                         :key="j"
                         @click="onSelectTime(i, j)"
+                        :style="isEditingWorkingTime?'cursor:pointer;':'cursor:default;'"
+                        v-ripple
                       >
-                        <v-icon color="green" v-if="user.workingTime[i][j]">mdi-check</v-icon>
+                        <v-icon color="blue" v-if="user.workingTime[i][j]">mdi-check</v-icon>
                         <v-icon color="red" v-else>mdi-close</v-icon>
-                      </v-btn>
+                      </v-sheet>
                     </v-col>
                   </v-col>
                 </v-col>
@@ -327,14 +335,23 @@ export default {
       this.snackbarIcon = icon;
       this.snackbarMessage = message;
     },
-    addNewHistory(content) {
+    addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    },
+    addHistory(content) {
       let date = new Date();
+      let hours = this.addZero(date.getHours());
+      let minutes = this.addZero(date.getMinutes());
+
       this.history.push({
         id: this.user.id,
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         color: this.user.color,
-        time: `${date.getHours()}:${date.getMinutes()}`,
+        time: `${hours}:${minutes}`,
         content: content
       });
     },
@@ -345,7 +362,7 @@ export default {
     onSaveSchedule(schedule) {
       this.isEditingSchedule = !this.isEditingSchedule;
       this.schedule = schedule;
-      this.addNewHistory("Release new schedule");
+      this.addHistory("Release new schedule");
     },
     onCancelSchedule() {
       this.isEditingSchedule = !this.isEditingSchedule;
@@ -361,14 +378,16 @@ export default {
     },
     onSaveWorkingTime() {
       this.isEditingWorkingTime = !this.isEditingWorkingTime;
-      this.addNewHistory(`Update Working Time`);
+      this.addHistory(`Update Working Time`);
       this.showSnackbar("success", "mdi-check", "Changes Saved!");
     },
     onSelectTime(weekday, time) {
-      this.user.workingTime[weekday][time] = !this.user.workingTime[weekday][
-        time
-      ];
-      this.$forceUpdate();
+      if (this.isEditingWorkingTime) {
+        this.user.workingTime[weekday][time] = !this.user.workingTime[weekday][
+          time
+        ];
+        this.$forceUpdate();
+      }
     },
     onEditEvents() {
       this.eventDialog = true;
@@ -411,10 +430,10 @@ export default {
         return a.start > b.start ? 1 : -1;
       });
 
-      this.addNewHistory(`Add new event - ${this.eventName}`);
+      this.addHistory(`Add new event - ${this.eventName}`);
     },
     onRemoveEvent(i) {
-      this.addNewHistory(`Remove event - ${this.events[i].name}`);
+      this.addHistory(`Remove event - ${this.events[i].name}`);
       this.events.splice(i, 1);
     }
   },

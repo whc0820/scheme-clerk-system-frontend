@@ -388,6 +388,21 @@ let mSchedule = [
 
 let mHistory = [];
 
+let mEvents = [
+  {
+    name: "Christmas",
+    start: "2019-12-25",
+    end: "2019-12-25",
+    color: "pink lighten-2"
+  },
+  {
+    name: "New Year",
+    start: "2020-01-01",
+    end: "2020-01-01",
+    color: "green lighten-2"
+  }
+];
+
 export default {
   data() {
     return {
@@ -395,50 +410,7 @@ export default {
       users: mUsers,
       schedule: mSchedule,
       history: mHistory,
-      events: [
-        {
-          name: "Weekly Meeting",
-          start: "2019-12-02",
-          end: "2019-12-02",
-          color: "blue lighten-2"
-        },
-        {
-          name: "Weekly Meeting",
-          start: "2019-12-09",
-          end: "2019-12-09",
-          color: "blue lighten-2"
-        },
-        {
-          name: "Weekly Meeting",
-          start: "2019-12-16",
-          end: "2019-12-16",
-          color: "blue lighten-2"
-        },
-        {
-          name: "Weekly Meeting",
-          start: "2019-12-23",
-          end: "2019-12-23",
-          color: "blue lighten-2"
-        },
-        {
-          name: "Weekly Meeting",
-          start: "2019-12-30",
-          end: "2019-12-30",
-          color: "blue lighten-2"
-        },
-        {
-          name: "Christmas Holiday",
-          start: "2019-12-25",
-          end: "2019-12-26",
-          color: "pink lighten-2"
-        },
-        {
-          name: "New Year Holiday",
-          start: "2020-01-01",
-          end: "2020-01-04",
-          color: "green lighten-2"
-        }
-      ]
+      events: mEvents
     };
   }
 };
