@@ -96,7 +96,7 @@ export default {
         },
         {
           text: "Settings",
-          icon: "mdi-settings-outline"
+          icon: "mdi-cog-outline"
         },
         {
           text: "Logout",
